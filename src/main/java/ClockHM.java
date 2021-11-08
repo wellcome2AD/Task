@@ -17,13 +17,13 @@ public class ClockHM implements IClock{
             h = _h;
         }
         else{
-            throw new TimeError("Некорректный ввод: H, " + _h);
+            throw new TimeError("Incorrect input: H, " + _h);
         }
         if (_m >= 0 && _m < 60){
             m = _m;
         }
         else{
-            throw new TimeError("Некорректный ввод: M, " + _h);
+            throw new TimeError("Incorrect input: M, " + _m);
         }
     }
 

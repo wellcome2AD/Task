@@ -11,16 +11,16 @@ public class ClockHMS extends ClockHM{
             s = _s;
         }
         else{
-            throw new TimeError("Incorrect input: S, " + _h);
+            throw new TimeError("Incorrect input: S, " + _s);
         }
     }
 
     @Override
-    public void SetTime(EArrow type, int val) throws TimeError {
+    public void SetTime(EArrow type, int val) throws TimeError{
         try{
             super.SetTime(type, val);
         }
-        catch(TimeError ex)
+        catch(MissingError ex)
         {
             if (val >= 0 && val < 60 ) {
                 s = val;
@@ -28,7 +28,10 @@ public class ClockHMS extends ClockHM{
             }
             throw new TimeError("Incorrect input: " + type + ", " + val);
         }
-        catch(MissingError ignored) { }
+        catch(TimeError ex)
+        {
+            throw ex;
+        }
     }
 
     @Override
