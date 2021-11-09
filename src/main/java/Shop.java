@@ -55,7 +55,7 @@ public class Shop {
             }
             catch (TimeError ex)
             {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ShopTest.class.getName()).log(Level.SEVERE, null, ex);
                 throw new TimeError("Error");
             }
 

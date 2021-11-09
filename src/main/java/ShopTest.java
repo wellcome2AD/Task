@@ -1,22 +1,28 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.TreeSet;
 
-public class Main {
+public class ShopTest {
+
     public static void main(String[] args){
         Shop clocksShop = new Shop();
+        Scanner in = new Scanner(System.in);
 
-        int h = 12, m = 30, s = 45;
+        int h, m, s;
 
+        System.out.println("We have many clocks in our shop:");
         ArrayList<IClock> listClocks = clocksShop.getClockList(); //Вывод списка часов.
         System.out.println(listClocks);
+
+        System.out.println("\nSet time:");
+        h = in.nextInt();
+        m = in.nextInt();
+        s = in.nextInt();
 
         try { //Устанавливать заданное время на всех часах.
             clocksShop.setTime(h, m, s);
         }
-        catch (TimeError e)
-        {
-            return;
-        }
+        catch (TimeError e) { return; }
         catch (MissingError ignored){ }
 
         listClocks = clocksShop.getClockList(); //Вывод списка часов.
