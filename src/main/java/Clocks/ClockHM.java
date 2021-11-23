@@ -65,6 +65,12 @@ public class ClockHM implements IClock{
     }
 
     @Override
+    public String GetTimeString() {
+        String time = String.valueOf(h)+":"+String.valueOf(m);
+        return time;
+    }
+
+    @Override
     public String toString(){
         return "\nBrand: " + brand + ", Price: " + price + ", Time: " + "h=" + h + ", m=" + m;
     }

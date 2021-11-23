@@ -9,7 +9,10 @@ public class Shop {
     private final ArrayList<IClock> listClocks = new ArrayList<>();
 
     public Shop(){
-        clockDelivery(10);
+    }
+
+    public void AddClock(IClock clock){
+        listClocks.add(clock);
     }
 
     private void clockDelivery(int n){ //поставка часов: при открытии магазина
@@ -98,5 +101,9 @@ public class Shop {
         for(IClock listClock : listClocks)
             res.add(listClock.GetBrand());
         return res;
+    }
+
+    public void RemoveClock(IClock clock) {
+        listClocks.remove(clock);
     }
 }

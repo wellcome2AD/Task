@@ -43,6 +43,13 @@ public class ClockHMS extends ClockHM{
     }
 
     @Override
+    public String GetTimeString()
+    {
+        String time = super.GetTimeString() + ":" + String.valueOf(s);
+        return time;
+    }
+
+    @Override
     public String toString(){
         return super.toString() + ", s=" + s;
     }

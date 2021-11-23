@@ -7,6 +7,19 @@ public interface IClock{
     void SetTime(EArrow type, int val) throws TimeError, MissingError;
     void ChangeTime(EArrow type, int val) throws TimeError, MissingError;
 
+    String GetTimeString();
+
+    public static TypeOfClock valueOf(String sType)
+    {
+        switch (sType) {
+            case "HM":
+                return TypeOfClock.HM;
+            case "HMS":
+                return TypeOfClock.HMS;
+            default:
+                return null;
+        }
+    }
     public static String valueOf(TypeOfClock type)
     {
         switch (type) {

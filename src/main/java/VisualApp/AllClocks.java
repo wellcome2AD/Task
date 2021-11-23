@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import Clocks.*;
 
 public class AllClocks {
-    ArrayList<IClock> allClocks = new ArrayList<>();
+    private Shop shopOfClock = new Shop();
+    //ArrayList<IClock> allClocks = new ArrayList<>();
     ArrayList<IObserver> o = new ArrayList<>();
 
     public void addO(IObserver obj)
@@ -13,24 +14,33 @@ public class AllClocks {
     }
 
     public void add(IClock clock){
-        allClocks.add(clock);
+        shopOfClock.AddClock(clock);
         event();
     }
 
     public void remove(IClock clock)
     {
-        allClocks.remove(clock);
+        shopOfClock.RemoveClock(clock);
         event();
     }
 
-    void event()
+    public void event()
     {
         for (IObserver obj : o) {
             obj.event(this);
         }
     }
 
-    ArrayList<IClock> getAllPair(){
-        return allClocks;
+    public ArrayList<IClock> getAllClocks(){
+        return shopOfClock.getClockList();
+    }
+
+    public Shop getShop(){
+        return shopOfClock;
+    }
+
+    public void setTime(int h, int m, int s) throws MissingError, TimeError {
+        shopOfClock.setTime(h, m, s);
+        event();
     }
 }

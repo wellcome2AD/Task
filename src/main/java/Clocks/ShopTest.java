@@ -1,6 +1,6 @@
 package Clocks;
 
-import VisualApp.ViewShop;
+import VisualApp.ViewAllClocks;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class ShopTest {
     public static void main(String[] args){
 
         if(true) {
-            ViewShop a = new ViewShop();
+            ViewAllClocks a = new ViewAllClocks();
         }
         Shop clocksShop = new Shop();
         Scanner in = new Scanner(System.in);
