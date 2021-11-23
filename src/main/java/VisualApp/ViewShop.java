@@ -1,6 +1,7 @@
 package VisualApp;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import Clocks.*;
@@ -45,10 +46,12 @@ public class ViewShop extends javax.swing.JPanel implements IObserver {
                 IClock clock = clockF.createClock(type, brand, price);
                 allClocks.add(clock);
 
+                //ContentPanel.removeAll();
+
                 ViewClock aViewClock = new ViewClock();
                 aViewClock.SetClock(clock, allClocks);
                 aViewClock.setVisible(true);
-                ContentPanel.removeAll();
+
                 ContentPanel.add(aViewClock.panel1);
                 ContentPanel.revalidate();
             }
@@ -77,5 +80,10 @@ public class ViewShop extends javax.swing.JPanel implements IObserver {
             ContentPanel.add(vc);
         }
         ScrollPane.revalidate();*/
+    }
+
+    private void createUIComponents() {
+        ContentPanel = new JPanel(new GridLayout(0, 1));
+        ContentPanel.setVisible(true);
     }
 }

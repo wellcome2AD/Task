@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import Clocks.*;
 
-public class ViewClock extends Component {
+public class ViewClock extends JPanel{
 
     IClock clock;
     AllClocks allClocks;
