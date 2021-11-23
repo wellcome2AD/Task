@@ -12,7 +12,9 @@
       <minimumSize width="250" height="-1"/>
       <preferredSize width="230" height="150"/>
     </properties>
-    <border type="line"/>
+    <border type="line">
+      <color color="-4473925"/>
+    </border>
     <children>
       <component id="683b6" class="javax.swing.JLabel" binding="Label2">
         <constraints>

@@ -30,6 +30,7 @@ public class ViewClock extends JPanel{
         deleteThisClockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                panel1.setVisible(false);
                 allClocks.remove(clock);
             }
         });
