@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.TreeSet;
+package Clocks;
 
 public class ClocksTest {
 
@@ -9,8 +7,8 @@ public class ClocksTest {
 
             int h = 12, m = 45, s = 20;
 
-            IClock clock1 = clockFactory.createClock(TypeOfClock.HM, "ClockHM", 100 );
-            IClock clock2 = clockFactory.createClock(TypeOfClock.HMS, "ClockHMS", 200 );
+            IClock clock1 = clockFactory.createClock(TypeOfClock.HM, "Clocks.ClockHM", 100 );
+            IClock clock2 = clockFactory.createClock(TypeOfClock.HMS, "Clocks.ClockHMS", 200 );
 
             System.out.println(clock1);
             System.out.println(clock2);

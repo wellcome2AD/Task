@@ -1,3 +1,5 @@
+package Clocks;
+
 public class ClockHMS extends ClockHM{
     protected int s = 0;
 

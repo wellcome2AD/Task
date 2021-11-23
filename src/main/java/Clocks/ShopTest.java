@@ -1,3 +1,7 @@
+package Clocks;
+
+import VisualApp.ViewShop;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeSet;

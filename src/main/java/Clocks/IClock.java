@@ -1,3 +1,5 @@
+package Clocks;
+
 public interface IClock{
     TypeOfClock GetType();
     String GetBrand();

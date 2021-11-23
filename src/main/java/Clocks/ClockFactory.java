@@ -1,3 +1,5 @@
+package Clocks;
+
 public class ClockFactory {
     public IClock createClock(TypeOfClock type, String brand, int price){
         IClock clock = null;

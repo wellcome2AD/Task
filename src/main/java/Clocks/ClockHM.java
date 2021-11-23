@@ -1,3 +1,5 @@
+package Clocks;
+
 public class ClockHM implements IClock{
 
     protected int h = 0, m = 0, price;
