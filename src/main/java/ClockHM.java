@@ -9,6 +9,11 @@ public class ClockHM implements IClock{
     }
 
     @Override
+    public TypeOfClock GetType() {
+        return TypeOfClock.HM;
+    }
+
+    @Override
     public String GetBrand() {
         return brand;
     }

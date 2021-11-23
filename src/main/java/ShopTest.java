@@ -5,6 +5,10 @@ import java.util.TreeSet;
 public class ShopTest {
 
     public static void main(String[] args){
+
+        if(true) {
+            ViewShop a = new ViewShop();
+        }
         Shop clocksShop = new Shop();
         Scanner in = new Scanner(System.in);
 

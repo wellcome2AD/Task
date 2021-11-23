@@ -4,6 +4,11 @@ public class ClockHMS extends ClockHM{
     public ClockHMS(String _brand, int _price) { super(_brand, _price); }
 
     @Override
+    public TypeOfClock GetType() {
+        return TypeOfClock.HMS;
+    }
+
+    @Override
     public void SetTime(EArrow type, int val) throws TimeError{
         try{
             super.SetTime(type, val);
