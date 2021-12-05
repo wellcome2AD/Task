@@ -1,18 +1,36 @@
 package Clocks;
 
-import VisualApp.ViewAllClocks;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeSet;
 
+
+/*import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;*/
+
+
 public class ShopTest {
+
+/*    void connect(){
+        try{
+            Class.forName("org.sqlite.JDBC");
+
+            DriverManager.getConnection("jdbc:sqlite:D:\\GithubFiles\\Task\\database.db");
+
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+    }*/
 
     public static void main(String[] args){
 
-        if(true) {
-            ViewAllClocks a = new ViewAllClocks();
-        }
+/*        ShopTest a = new ShopTest();
+        a.connect();*/
+
         Shop clocksShop = new Shop();
         Scanner in = new Scanner(System.in);
 

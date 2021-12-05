@@ -2,8 +2,14 @@ package VisualApp;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Clocks.*;
@@ -12,8 +18,8 @@ public class ViewAllClocks extends javax.swing.JPanel implements IObserver {
 
     AllClocks allClocks = new AllClocks();
 
-    private JTextField TypeField;
     private JTextField BrandField;
+    private JTextField TypeField;
     private JTextField PriceField;
     private JButton addClockButton;
     private JPanel MainPanel;
@@ -24,13 +30,11 @@ public class ViewAllClocks extends javax.swing.JPanel implements IObserver {
     private JTextField MinuteField;
     private JTextField SecondField;
     private JButton setTimeButton;
+    private JButton readFromFileButton;
+    private JButton writeButton;
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+        javax.swing.SwingUtilities.invokeLater(ViewAllClocks::createAndShowGUI);
     }
 
     public ViewAllClocks() {
@@ -38,21 +42,21 @@ public class ViewAllClocks extends javax.swing.JPanel implements IObserver {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                TypeOfClock type = null;
-                String sType = "";
-                String brand = "";
-                int price = 0;
+                TypeOfClock type;
+                String sType;
+                String brand;
+                int price;
 
                 try
                 {
-                    if (TypeField.getText().isEmpty() || BrandField.getText().isEmpty() || PriceField.getText().isEmpty())
+                    if (BrandField.getText().isEmpty() || TypeField.getText().isEmpty() || PriceField.getText().isEmpty())
                     {
                         JOptionPane.showMessageDialog(null, "Not all fields are entered", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
-                    sType = TypeField.getText();
                     brand = BrandField.getText();
+                    sType = TypeField.getText();
                 }
                 catch(Exception ex)
                 {
@@ -62,11 +66,11 @@ public class ViewAllClocks extends javax.swing.JPanel implements IObserver {
 
                 try
                 {
-                    price = Integer.valueOf(PriceField.getText());
+                    price = Integer.parseInt(PriceField.getText());
                 }
                 catch(Exception ex)
                 {
-                    JOptionPane.showMessageDialog(null, "Incorrect clock type", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Incorrect data type", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -75,7 +79,7 @@ public class ViewAllClocks extends javax.swing.JPanel implements IObserver {
                 type = IClock.valueOf(sType);
                 if (type == null)
                 {
-                    JOptionPane.showMessageDialog(null, "Incorrect data type", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Incorrect clock type", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -87,16 +91,16 @@ public class ViewAllClocks extends javax.swing.JPanel implements IObserver {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                int hour = 0, min = 0, sec = 0;
+                int hour, min, sec;
                 try {
                     if (HourField.getText().isEmpty() || MinuteField.getText().isEmpty() || SecondField.getText().isEmpty())
                     {
                         JOptionPane.showMessageDialog(null, "Not all fields are entered", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    hour = Integer.valueOf(HourField.getText());
-                    min = Integer.valueOf(MinuteField.getText());
-                    sec = Integer.valueOf(SecondField.getText());
+                    hour = Integer.parseInt(HourField.getText());
+                    min = Integer.parseInt(MinuteField.getText());
+                    sec = Integer.parseInt(SecondField.getText());
                 }
                 catch(Exception er)
                 {
@@ -112,6 +116,40 @@ public class ViewAllClocks extends javax.swing.JPanel implements IObserver {
                     return;
                 }
                 catch (MissingError ignored){}
+            }
+        });
+        writeButton.addMouseListener(new MouseAdapter() {
+        });
+        writeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                FileDialog fd = new FileDialog((Frame) null, "Choose a file", FileDialog.LOAD);
+                fd.setDirectory(".");
+                fd.setFile(".txt");
+                fd.setVisible(true);
+                String filename = fd.getFile();
+                if (filename == null)
+                    return;
+                else
+                    allClocks.getShop().WriteToFile(filename);
+            }
+        });
+        readFromFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                FileDialog fd = new FileDialog((Frame) null, "Choose a file", FileDialog.LOAD);
+                fd.setDirectory(".");
+                fd.setFile(".txt");
+                fd.setVisible(true);
+                String filename = fd.getFile();
+                if (filename == null)
+                    return;
+                else {
+                    allClocks.removeAll();
+
+                    allClocks.getShop().ReadFromFile(filename);
+                    event(allClocks);
+                }
             }
         });
     }

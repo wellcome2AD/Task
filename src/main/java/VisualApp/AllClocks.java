@@ -5,7 +5,6 @@ import Clocks.*;
 
 public class AllClocks {
     private Shop shopOfClock = new Shop();
-    //ArrayList<IClock> allClocks = new ArrayList<>();
     ArrayList<IObserver> o = new ArrayList<>();
 
     public void addO(IObserver obj)
@@ -21,6 +20,12 @@ public class AllClocks {
     public void remove(IClock clock)
     {
         shopOfClock.RemoveClock(clock);
+        event();
+    }
+
+    public void removeAll()
+    {
+        shopOfClock.RemoveAllClock();
         event();
     }
 

@@ -3,6 +3,7 @@ package Clocks;
 public class ClocksTest {
 
         public static void main(String[] args){
+
             ClockFactory clockFactory = new ClockFactory();
 
             int h = 12, m = 45, s = 20;

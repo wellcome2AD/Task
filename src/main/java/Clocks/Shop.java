@@ -1,5 +1,6 @@
 package Clocks;
 
+import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,11 +50,8 @@ public class Shop {
 
     public void setTime(int _h, int _m, int _s) throws TimeError, MissingError //Устанавливать заданное время на всех часах.
     {
-        int n = 0;
-
         for (IClock listClock : listClocks) {
             try {
-                n++;
                 listClock.SetTime(EArrow.H, _h);
                 listClock.SetTime(EArrow.M, _m);
                 listClock.SetTime(EArrow.S, _s);
@@ -105,5 +103,73 @@ public class Shop {
 
     public void RemoveClock(IClock clock) {
         listClocks.remove(clock);
+    }
+
+    public void RemoveAllClock() {
+        listClocks.clear();
+    }
+
+    public void WriteToFile(String nameOfFile){
+        File listOfClocks = new File(".", nameOfFile);
+        String res = new String();
+
+        for (IClock clock: listClocks) {
+            res = res + clock.GetBrand() + ';' + clock.GetType() + ';' + clock.GetPrice()
+                    + ';' + clock.GetTimeString() + ';' + "\r\n";
+        }
+        try {
+            FileWriter writer = new FileWriter(listOfClocks, false);
+            writer.write(res);
+            writer.close();
+            //writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ReadFromFile(String nameOfFile){
+        File listOfClocks = new File(".", nameOfFile);
+        String line = "";
+
+        try
+        {
+            FileReader fr = new FileReader(listOfClocks);
+            BufferedReader reader = new BufferedReader(fr);
+            line = reader.readLine();
+            while (line != null) {
+                String[] clockInfo = line.split(";");
+                String[] timeInfo = clockInfo[3].split(":");
+                ClockFactory clockFactory = new ClockFactory();
+
+                IClock clock = clockFactory.createClock(valueOf(clockInfo[1]), clockInfo[0], Integer.parseInt(clockInfo[2]));
+
+                int size = timeInfo.length;
+                clock.SetTime(EArrow.H, Integer.parseInt(timeInfo[0]));
+                clock.SetTime(EArrow.M, Integer.parseInt(timeInfo[1]));
+                if (size == 3)
+                    clock.SetTime(EArrow.S, Integer.parseInt(timeInfo[2]));
+
+                AddClock(clock);
+
+                line = reader.readLine();
+            }
+            reader.close();
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+        catch (TimeError | MissingError ignored) {}
+    }
+
+    private TypeOfClock valueOf(String sType)
+    {
+        switch (sType) {
+            case "HM":
+                return TypeOfClock.HM;
+            case "HMS":
+                return TypeOfClock.HMS;
+            default:
+                return null;
+        }
     }
 }
